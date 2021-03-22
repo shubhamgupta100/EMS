@@ -26,7 +26,7 @@
                         <div class="panel-title"><%=title %></div>
                     </div>
                     <div class="panel-body">
-                        <form action="/update/" id="EmployeeForm" class="form-horizontal" method="post" role="form">
+                        <form action="/update/" id="EmployeeForm" class="form-horizontal" method="post" role="form"  enctype="multipart/form-data">
                             
                             <div id="signupalert" style="display:none" class="alert alert-danger">
                                 <p>Error:</p>
@@ -73,6 +73,16 @@
                                         placeholder="Enter Total Hours">
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="icode" class="col-md-3 control-label"> Profile Image</label>
+                                <div class="col-md-9">
+                                    <input type="file" class="form-control" name="avatar">
+                                </div>
+                            </div>
+                            <% if (data.image) { %>
+                                <img src="/uploads/<%= data.image %>" width="50" height="50" alt="profile image">
+                            <% } %>
 
                             <div class="form-group">
                                 <!-- Button -->

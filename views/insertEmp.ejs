@@ -18,6 +18,11 @@
 <body>
     <div class="container">
         <div class="row">
+            <% if(success !=''){%>
+                <div class="alert alert-success">
+                  <strong>Success!</strong> <%= success %>
+                </div>
+                <% } %>
 
             <h1>Filter Employee Records</h1>
             <div class="col-md-12">
@@ -75,6 +80,7 @@
                 <th scope="col">Hourly Rate</th>
                 <th scope="col">Total Hour</th>
                 <th scope="col">Total</th>
+                <th scope="col">Profile Image</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -101,6 +107,13 @@
                         <td>
                             <%= row.total %>
                         </td>
+
+                        <td>
+                             
+                            <% if (row.image) { %>
+                                <img src="/uploads/<%= row.image %>" width="50" height="50" alt="profile image">
+                            <% } %>
+                        </td>
                         <td><a class="btn btn-primary btn-xs" href="/edit/<%= row._id %>"><i class="fa fa-edit"></i></a>
                             <a class="btn btn-danger btn-xs" href="/delete/<%= row._id %>"><i
                                     class="fa fa-trash"></i></a>
@@ -109,7 +122,6 @@
                     <% })}else{ %>
                         <tr>
                             <td colspan="6">No Record Found</td>
-
                         </tr>
                         <% } %>
         </tbody>
@@ -124,7 +136,7 @@
                         <div class="panel-title">Employee Details Form</div>
                     </div>
                     <div class="panel-body">
-                        <form action="/" id="EmployeeForm" class="form-horizontal" method="post" role="form">
+                        <form action="/" id="EmployeeForm" class="form-horizontal" method="post" role="form"  enctype="multipart/form-data">
 
 
                             <div id="signupalert" style="display:none" class="alert alert-danger">
@@ -172,12 +184,12 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="icode" class="col-md-3 control-label"> Profile Image</label>
                                 <div class="col-md-9">
-                                    <input type="file" class="form-control" name="file">
+                                    <input type="file" class="form-control" name="avatar">
                                 </div>
-                            </div> -->
+                            </div>
 
                             <div class="form-group">
                                 <!-- Button -->

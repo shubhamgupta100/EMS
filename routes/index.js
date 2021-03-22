@@ -1,17 +1,57 @@
 var express = require('express');
 const empSchema = require('../model/empModel');
+const uploadSchema = require('../model/upload');
 var router = express.Router();
+var multer = require('multer');
+const path = require('path');
+const { extname } = require('path');
 const employee = empSchema.find({});
+const imageData = uploadSchema.find({});
+
+router.use(express.static(__dirname+"./public/"));
+var storage = multer.diskStorage({
+  destination:"./public/uploads/",
+  filename:(req , file , cb)=> {
+    cb(null , file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+  }
+})
+var upload = multer({
+  storage:storage,
+}).single('avatar')
 /* GET home page. */
+router.post('/upload', upload,function(req, res, next) {
+  var imageName = req.file.filename;
+  success=req.file.filename+" Uploaded Successfully !";
+  var imageDetail = new uploadSchema ({
+    imageName:imageName
+  });
+  imageDetail.save(function(err , doc) {
+    if(err) throw err;  
+    imageData.exec(function(err ,data){
+      if(err) throw err;
+      res.render('upload-file', { title: 'Upload File' ,success:success , data:data } );
+    })
+  })
+});
+
+router.get('/upload', function(req, res, next) {
+  employee.exec(function(err){
+    if(err) throw err;  
+    imageData.exec(function(err ,data){
+      if(err) throw err;
+      res.render('upload-file', { title: 'Upload File' ,success:'' , data:data } );
+    });
+  })
+});
+
 router.get('/', function(req, res, next) {
   employee.exec(function(err , data){
     if(err) throw err;  
-    res.render('insertEmp', { title: 'Employee Form' ,data } );
+    res.render('insertEmp', { title: 'Employee Form' ,data , success:'' } );
   })
- 
 });
 
-router.post('/' , (req , res , next ) => {
+router.post('/' , upload , (req , res , next ) => {
   empDetail = new empSchema({
     name:req.body.name,
     email:req.body.email,
@@ -19,12 +59,13 @@ router.post('/' , (req , res , next ) => {
     hRate:req.body.hRate,
     tHour:req.body.tHour,
     total:parseInt(req.body.hRate)*parseInt(req.body.tHour),
+    image:req.file.filename,
   });
 
   empDetail.save(function(err , response){
     employee.exec(function(err , data){
       if(err) throw err;  
-      res.render('insertEmp', { title: 'Employee Form' ,data } );
+      res.render('insertEmp', { title: 'Employee Form' ,data ,success:"Data Inserted !"} );
     })
   })
   
@@ -61,7 +102,7 @@ router.post('/search/', function(req, res, next) {
   var employeeFilter =empSchema.find(flterParameter);
   employeeFilter.exec(function(err,data){
       if(err) throw err;
-      res.render('insertEmp', { title: 'Employee Form' ,data } );
+      res.render('insertEmp', { title: 'Employee Form' ,data ,success:''} );
         });
 });
 
@@ -74,19 +115,37 @@ router.get('/edit/:id', function(req, res, next) {
   })
 });
 
-router.post('/update', function(req, res, next) {
-  var updateEmployee = empSchema.findByIdAndUpdate(req.body.id , {
+router.post('/update', upload ,function(req, res, next) {
+  if(req.file){
+   var  dataRecord = {
     name:req.body.name,
     email:req.body.email,
     eType:req.body.eType,
     hRate:req.body.hRate,
     tHour:req.body.tHour,
+    image:req.file.filename,
     total:parseInt(req.body.hRate)*parseInt(req.body.tHour),
 
-  })
+  }
+  }else{
+    var dataRecord ={
+      name:req.body.name,
+      email:req.body.email,
+      eType:req.body.eType,
+      hRate:req.body.hRate,
+      tHour:req.body.tHour,
+      total:parseInt(req.body.hRate)*parseInt(req.body.tHour),
+  
+    }
+  }
+  var updateEmployee = empSchema.findByIdAndUpdate(req.body.id , dataRecord)
   updateEmployee.exec(function(err){
     if(err) throw err;  
-    res.redirect("/");
+    employee.exec(function(err , data){
+      if(err) throw err;  
+      // res.redirect('/' )
+      res.render('insertEmp', { title: 'Employee Form' ,data , success:'Record Updated !' } );
+    })
   })
 });
 
@@ -97,7 +156,10 @@ router.get('/delete/:id', function(req, res, next) {
   var delEmployee = empSchema.findByIdAndDelete(Id);
   delEmployee.exec(function(err ){
     if(err) throw err;  
-    res.redirect('/');
+    employee.exec(function(err , data){
+      if(err) throw err;  
+      res.render('insertEmp', { title: 'Employee Form' ,data , success:'Record Deleted !' } );
+    })
   })
 });
 
