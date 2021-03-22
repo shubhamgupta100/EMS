@@ -18,52 +18,51 @@
 <body>
     <div class="container">
         <div class="row">
-           
-                    <h1>Filter Employee Records</h1>
-                    <div class="col-md-12">
-                        <form action="/search/" id="EmployeeForm" class="form-horizontal" method="post" role="form">
 
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="name" class="col-md-12 control-label">By Name</label>
-                                    <div class="col-md-12">
-                                        <input type="text" id="searchName" class="form-control" name="fltrname"
-                                            placeholder="Enter Name">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="email" class="col-md-12 control-label">By Email</label>
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control" name="fltremail"
-                                            placeholder="Enter Email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="email" class="col-md-12 control-label">By Employee Type</label>
-                                    <div class="col-md-12">
-                                        <select class="form-control" name="fltremptype">
-                                            <option value="Hourly">Hourly</option>
-                                            <option value="Fixed">Fixed</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="email" class="col-md-12 control-label">&nbsp;</label>
+            <h1>Filter Employee Records</h1>
+            <div class="col-md-12">
+                <form action="/search/" id="EmployeeForm" class="form-horizontal" method="post" role="form">
 
-                                    <div class="col-md-12">
-                                        <input type="submit" class="form-control btn btn-primary" name="submit"
-                                            placeholder="Filter">
-                                    </div>
-                                </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="name" class="col-md-12 control-label">By Name</label>
+                            <div class="col-md-12">
+                                <input type="text" id="searchName" class="form-control" name="fltrname"
+                                    placeholder="Enter Name">
                             </div>
-                        </form>
+                        </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="email" class="col-md-12 control-label">By Email</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" name="fltremail" placeholder="Enter Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="email" class="col-md-12 control-label">By Employee Type</label>
+                            <div class="col-md-12">
+                                <select class="form-control" name="fltremptype">
+                                    <option value="Hourly">Hourly</option>
+                                    <option value="Fixed">Fixed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="email" class="col-md-12 control-label">&nbsp;</label>
+
+                            <div class="col-md-12">
+                                <input type="submit" class="form-control btn btn-primary" name="submit"
+                                    placeholder="Filter">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <h1>Employee Details</h1>
@@ -76,6 +75,7 @@
                 <th scope="col">Hourly Rate</th>
                 <th scope="col">Total Hour</th>
                 <th scope="col">Total</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
 
@@ -100,6 +100,10 @@
                         </td>
                         <td>
                             <%= row.total %>
+                        </td>
+                        <td><a class="btn btn-primary btn-xs" href="/edit/<%= row._id %>"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-danger btn-xs" href="/delete/<%= row._id %>"><i
+                                    class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     <% })}else{ %>

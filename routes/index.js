@@ -63,8 +63,42 @@ router.post('/search/', function(req, res, next) {
       if(err) throw err;
       res.render('insertEmp', { title: 'Employee Form' ,data } );
         });
-  
-  
+});
+
+router.get('/edit/:id', function(req, res, next) {
+  var Id = req.params.id;
+  var editEmployee = empSchema.findById(Id);
+  editEmployee.exec(function(err , data){
+    if(err) throw err;  
+    res.render('edit' ,{title :"Edit Employee Record" , data});
+  })
+});
+
+router.post('/update', function(req, res, next) {
+  var updateEmployee = empSchema.findByIdAndUpdate(req.body.id , {
+    name:req.body.name,
+    email:req.body.email,
+    eType:req.body.eType,
+    hRate:req.body.hRate,
+    tHour:req.body.tHour,
+    total:parseInt(req.body.hRate)*parseInt(req.body.tHour),
+
+  })
+  updateEmployee.exec(function(err){
+    if(err) throw err;  
+    res.redirect("/");
+  })
+});
+
+
+
+router.get('/delete/:id', function(req, res, next) {
+  var Id = req.params.id;
+  var delEmployee = empSchema.findByIdAndDelete(Id);
+  delEmployee.exec(function(err ){
+    if(err) throw err;  
+    res.redirect('/');
+  })
 });
 
 module.exports = router;
