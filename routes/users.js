@@ -7,7 +7,9 @@ const passport = require('passport')
 
 // Get SignUp page
 router.get('/signup',passport.setAuthenticatedUser, function (req, res) {
-  
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+}
   res.render('signup');
 });
 
@@ -40,6 +42,9 @@ router.post('/signup', function (req, res) {
 
 // Sign In Page
 router.get('/signin', function (req, res) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+}
   res.render('signin');
 });
 
