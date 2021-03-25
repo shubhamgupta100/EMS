@@ -58,15 +58,27 @@ router.get('/',passport.checkAuthentication, function (req, res) {
 });
 
 router.post('/', upload, (req, res, next) => {
-  empDetail = new empSchema({
-    name: req.body.name,
-    email: req.body.email,
-    eType: req.body.eType,
-    hRate: req.body.hRate,
-    tHour: req.body.tHour,
-    total: parseInt(req.body.hRate) * parseInt(req.body.tHour),
-    image: req.file.filename,
-  });
+  if(req.file){
+    empDetail = new empSchema({
+      name: req.body.name,
+      email: req.body.email,
+      eType: req.body.eType,
+      hRate: req.body.hRate,
+      tHour: req.body.tHour,
+      total: parseInt(req.body.hRate) * parseInt(req.body.tHour),
+      image: req.file.filename,
+    });
+  }
+  else{
+    empDetail = new empSchema({
+      name: req.body.name,
+      email: req.body.email,
+      eType: req.body.eType,
+      hRate: req.body.hRate,
+      tHour: req.body.tHour,
+      total: parseInt(req.body.hRate) * parseInt(req.body.tHour),
+    });
+  }
 
   empDetail.save(function (err, response) {
     employee.exec(function (err, data) {

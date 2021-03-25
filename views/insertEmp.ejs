@@ -34,15 +34,15 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">EMS</a>
+          <b><a class="navbar-brand" href="#" style="font-weight: 900 !important;">EMS</a></b>  
           </div>
       
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             
             <ul class="nav navbar-nav navbar-right">
-                <li><a href=""><%= user.name %></a> </li>
-              <li> <a href="/users/logout">Logout</a></li>
+                <li><a href=""><b style="color: rgb(72, 100, 223);"><%= user.name %></b></a> </li>
+              <li> <a href="/users/logout" style="font-weight: 900;">Logout</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -148,8 +148,7 @@
                             <%= row.total %>
                         </td>
 
-                        <td>
-                             
+                        <td>  
                             <% if (row.image) { %>
                                 <img src="/uploads/<%= row.image %>" width="50" height="50" alt="profile image">
                             <% } %>
@@ -187,14 +186,14 @@
                             <div class="form-group">
                                 <label for="firstname" class="col-md-3 control-label">Name</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="name" placeholder="Enter Your Name">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter Your Name" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="email" class="col-md-3 control-label">Email</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                    <input type="text" class="form-control" name="email" placeholder="Email Address" required>
                                 </div>
                             </div>
 
@@ -212,7 +211,7 @@
                                 <label for="password" class="col-md-3 control-label">Hourly Rate</label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="hRate"
-                                        placeholder="Enter Hourly Rate">
+                                        placeholder="Enter Hourly Rate" required>
                                 </div>
                             </div>
 
@@ -220,7 +219,7 @@
                                 <label for="icode" class="col-md-3 control-label"> Total Hour</label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="tHour"
-                                        placeholder="Enter Total Hours">
+                                        placeholder="Enter Total Hours" required>
                                 </div>
                             </div>
 
