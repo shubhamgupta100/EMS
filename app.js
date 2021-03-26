@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const port = process.env.PORT || 5000;
 var logger = require('morgan');
 const db  = require('./config/mongoose');
 const session = require('express-session');
@@ -66,9 +67,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// app.listen(4000 , (err )=> {
-//   if(err) throw err;
-//   console.log("Server is running on port :4000");
-// })
+app.listen(port , (err )=> {
+  if(err) throw err;
+  console.log("Server is running on port :" , port);
+})
 
 module.exports = app;
