@@ -5,6 +5,7 @@
     <title>
         <%= title %>
     </title>
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -23,6 +24,14 @@
             font-family: 'Ovo' !important;
             color: rgb(34, 32, 32);
         }
+        #signupbox {
+            width: 100%;
+            position: relative;
+            margin: auto;
+        }
+        .col-sm-9 div, .col-sm-9 label{
+    margin: 0px;
+}
 </style>
 
 <body>
@@ -42,8 +51,9 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" >
                 <li><a href=""><b style="color: rgb(72, 100, 223);"><%= user.name %></b></a> </li>
+                <li> <a href="/emp-detail" style="font-weight: 900;">Employee Detail</a></li>
               <li> <a href="/users/logout" style="font-weight: 900;">Logout</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -52,140 +62,16 @@
 
     <div class="container">
         <div class="row">
-            <% if(success !=''){%>
-                <div class="alert alert-success">
-                  <strong>Success!</strong> <%= success %>
-                </div>
-                <% } %>
-                <%if (success_message  != '') { %>
-                    <div class="alert alert-success alert-dismissible">
-                        <strong><%= success_message%></strong> 
-                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
-                      </div>
-                       
-                        
-                <% } %> 
-
-            <h1>Filter Employee Records</h1>
-            <div class="col-md-12" style="display: flex; flex-wrap: wrap;" >
-                <form action="/search/" id="EmployeeForm" class="form-horizontal" method="post" role="form">
-
-                    <div class="col-md-3 col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="col-md-12 control-label">By Name</label>
-                            <div class="col-md-12">
-                                <input type="text" id="searchName" class="form-control" name="fltrname"
-                                    placeholder="Enter Name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-10">
-                        <div class="form-group">
-                            <label for="email" class="col-md-12 control-label">By Email</label>
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="fltremail" placeholder="Enter Email">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-10">
-                        <div class="form-group">
-                            <label for="email" class="col-md-12 control-label">By Employee Type</label>
-                            <div class="col-md-12">
-                                <select class="form-control" name="fltremptype">
-                                    <option value="Hourly">Hourly</option>
-                                    <option value="Fixed">Fixed</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-10">
-                        <div class="form-group">
-                            <label for="email" class="col-md-12 control-label">&nbsp;</label>
-
-                            <div class="col-md-12">
-                                <input type="submit" class="form-control btn btn-primary" name="submit"
-                                    placeholder="Filter">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-  
-    <h1>Employee Details</h1>
-    <div class="table-responsive" >
-        <table class="table table-bordered" >
-            <thead>
-                <tr class="table-primary">
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Employee Type</th>
-                    <th scope="col">Hourly Rate</th>
-                    <th scope="col">Total Hour</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Profile Image</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-    
-            <tbody>
-                <%if (data.length>0){ %>
-                    <% data.forEach(function(row){ %>
-                        <tr class="table-light">
-                            <td scope="row">
-                                <%= row.name %>
-                            </td>
-                            <td scope="row">
-                                <%= row.email %>
-                            </td>
-                            <td scope="row">
-                                <%= row.eType %>
-                            </td>
-                            <td scope="row">
-                                <%= row.hRate %>
-                            </td>
-                            <td scope="row">
-                                <%= row.tHour %>
-                            </td>
-                            <td scope="row">
-                                <%= row.total %>
-                            </td>
-    
-                            <td scope="row">  
-                                <% if (row.image) { %>
-                                    <img src="/uploads/<%= row.image %>" width="50" height="50" alt="profile image">
-                                <% } %>
-                            </td>
-                            <td><a class="btn btn-primary btn-xs" href="/edit/<%= row._id %>"><i class="fa fa-edit"></i></a>
-                                <a class="btn btn-danger btn-xs" href="/delete/<%= row._id %>"><i
-                                        class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <% })}else{ %>
-                            <tr>
-                                <td colspan="6">No Record Found</td>
-                            </tr>
-                            <% } %>
-            </tbody>
-        </table>
-    </div>
-   
-    <div class="container">
-        <div class="row">
-            <div id="signupbox" style="margin-top:50px"
-                class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div id="signupbox" style="margin-top:50px" class="col-xl-6 col-md-6">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <div class="panel-title">Employee Details Form</div>
                     </div>
                     <div class="panel-body">
                         <form action="/" id="EmployeeForm" class="form-horizontal" method="post" role="form"  enctype="multipart/form-data">
-
-
-                            <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <div id="signupalert" style="display:none" class="alert alert-danger alert-dismissible">
                                 <p>Error:</p>
-                                <span></span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
 
                             <div class="form-group">
@@ -204,7 +90,7 @@
 
 
                             <div class="form-group">
-                                <label for="lastname" class="col-md-3 control-label">Employee Type</label>
+                                <label for="type" class="col-md-3 control-label">Employee Type</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="eType">
                                         <option value="Hourly">Hourly</option>
@@ -238,7 +124,7 @@
                             <div class="form-group">
                                 <!-- Button -->
                                 <div class="col-md-offset-3 col-md-9">
-                                    <input type="submit" name="submit" value="submit" class="btn btn-primary">
+                                    <input type="submit" name="submit" value="submit" class="btn btn-primary" style="background-color: #0d6efd;">
                                 </div>
                             </div>
                         </form>

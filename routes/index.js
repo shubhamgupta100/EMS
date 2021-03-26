@@ -87,9 +87,16 @@ router.post('/', upload, (req, res, next) => {
     })
   })
 
-  console.log(req.body);
-
 });
+
+router.get('/emp-detail' , passport.checkAuthentication,(req , res) => {
+  var success;
+  employee.exec(function (err, data) {
+    if (err) throw err;
+    res.render('empDetail', { data:data ,success:''});
+  })
+  
+})
 
 router.post('/search/', function (req, res, next) {
 
@@ -124,7 +131,7 @@ router.post('/search/', function (req, res, next) {
   var employeeFilter = empSchema.find(flterParameter);
   employeeFilter.exec(function (err, data) {
     if (err) throw err;
-    res.render('insertEmp', { title: 'Employee Form', data, success: '' });
+    res.render('empDetail', {  data:data , success:''});
   });
 });
 
@@ -166,7 +173,7 @@ router.post('/update', upload, function (req, res, next) {
     employee.exec(function (err, data) {
       if (err) throw err;
       // res.redirect('/' )
-      res.render('insertEmp', { title: 'Employee Form', data, success: 'Record Updated !' });
+      res.render('empDetail', {  data, success: 'Record Updated !' });
     })
   })
 });
