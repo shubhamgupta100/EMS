@@ -22,57 +22,70 @@
             width: 50%;
             position: relative;
             margin: auto;
+            padding-left: 10px;
+            padding-right: 10px;
         }
+       
         h4 {
             font-weight: 800 !important;
+        }
+        @media screen and (max-width: 900px) {
+            .form-wrap {
+            width: 90%;
+            margin-top: 20px !important;         
+        }
         }
     </style>
 </head>
 
 <body>
-    <div class="row form-wrap mt-5 card  p-4">
-        <form class="row g-3" action="/users/signup" method="POST">
+    <div class=" form-wrap mt-5 card " >
+        <form class="row" action="/users/signup" method="POST" >
 
-            <div>
-                <h4>Sign Up Form</h4>
-            </div>
+            
                     <%if (typeof err != 'undefined') { %>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong><%= err%></strong> 
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                           </div>
-                    <% } %>      
-            <div class="col-md-6">
+                    <% } %> 
+                    <div class="card-header col-md-12 mb-4 p-2" style="background-color: #d9edf7 !important;">
+                        Sign Up Form
+                      </div>   
+                      
+
+                      
+            <div class="col-md-6  px-4  pb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" name="name" class="form-control" id="inputName" placeholder="Your name..">
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 px-4 pb-3">
                 <label for="inputEmail4" class="form-label">Email</label>
                 <input type="email" name="email" class="form-control" id="inputEmail4">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 px-4 pb-3">
                 <label for="inputPassword4" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="inputPassword4">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 px-4 pb-3">
                 <label for="inputPassword4" class="form-label">Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control" id="inputconfirmPassword4">
             </div>
-            <div class="col-12">
+            <div class="col-12 px-4 pb-3">
                 <label for="inputAddress" class="form-label">Address</label>
                 <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address...">
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 px-4 pb-3">
                 <label for="inputCity" class="form-label">City</label>
                 <input type="text" name="city" class="form-control" id="inputCity">
             </div>
-            <div class="mb-2">
+            <div class="mb-2 px-4">
                 <a href="/users/signin" style="text-decoration: none; color: rgb(63, 126, 221);" >Already a User Sign In Here</a>
             </div>
 
-            <div class="col-12">
+            <div class="col-12 px-4 pb-4">
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
         </form>
