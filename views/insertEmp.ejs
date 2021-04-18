@@ -2,137 +2,141 @@
 <html>
 
 <head>
+       <!-- Required meta tags -->
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         <%= title %>
     </title>
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-   <!-- CSS only -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Ovo' rel='stylesheet'>
    
 </head>
 <style>
-      body {
-            font-family: 'Ovo' !important;
-            color: rgb(34, 32, 32);
-        }
-        #signupbox {
-            width: 100%;
-            position: relative;
-            margin: auto;
-        }
-        .col-sm-9 div, .col-sm-9 label{
-    margin: 0px;
-}
+    body {
+        font-family: 'Ovo' !important;
+        color: rgb(102, 87, 87);
+        /* margin-top: 10%; */
+    }
+
+    .form-container {
+        width: 80%;
+        position: relative;
+        margin: auto;
+    }
+
+    h4 {
+        font-weight: 800 !important;
+    }
+
+    @media screen and (max-width: 900px) {
+        .form-container {
+        width: 90%;
+        margin-top: 50px !important;         
+    }
+    }
 </style>
 
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
         <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          <b><a class="navbar-brand" href="#" style="font-weight: 900 !important;">EMS</a></b>  
+          <a class="navbar-brand" href="/">EMS</a>
+         
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ">
+                
+              
+                <li class="nav-item ">
+                  <a class="nav-link active" aria-current="page" href="#" style="font-weight: 900;"><b style="color: rgb(72, 100, 223);"><%= user.name %></b></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/emp-detail"  style="font-weight: 900;">Employee Detail</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/logout" style="font-weight: 900;">Logout</a>
+                </li>
+               
+              </ul>
           </div>
-      
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            
-            <ul class="nav navbar-nav navbar-right" >
-                <li><a href=""><b style="color: rgb(72, 100, 223);"><%= user.name %></b></a> </li>
-                <li> <a href="/emp-detail" style="font-weight: 900;">Employee Detail</a></li>
-              <li> <a href="/users/logout" style="font-weight: 900;">Logout</a></li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+        </div>
       </nav>
 
-    <div class="container">
-        <div class="row">
-            <div id="signupbox" style="margin-top:50px" class="col-xl-6 col-md-6">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <div class="panel-title">Employee Details Form</div>
-                    </div>
-                    <div class="panel-body">
-                        <form action="/" id="EmployeeForm" class="form-horizontal" method="post" role="form"  enctype="multipart/form-data">
-                            <div id="signupalert" style="display:none" class="alert alert-danger alert-dismissible">
-                                <p>Error:</p>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="firstname" class="col-md-3 control-label">Name</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="name" placeholder="Enter Your Name" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email" class="col-md-3 control-label">Email</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="email" placeholder="Email Address" required>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="type" class="col-md-3 control-label">Employee Type</label>
-                                <div class="col-md-9">
-                                    <select class="form-control" name="eType">
-                                        <option value="Hourly">Hourly</option>
-                                        <option value="Fixed">Fixed</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-md-3 control-label">Hourly Rate</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="hRate"
-                                        placeholder="Enter Hourly Rate" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="icode" class="col-md-3 control-label"> Total Hour</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="tHour"
-                                        placeholder="Enter Total Hours" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="icode" class="col-md-3 control-label"> Profile Image</label>
-                                <div class="col-md-9">
-                                    <input type="file" class="form-control" name="avatar">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <!-- Button -->
-                                <div class="col-md-offset-3 col-md-9">
-                                    <input type="submit" name="submit" value="submit" class="btn btn-primary" style="background-color: #0d6efd;">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+       <div class="form-container mt-5 mb-5 card">
+        <form action="/" id="EmployeeForm"  method="post" role="form"  enctype="multipart/form-data">
+            <%if (success_message !='' ) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>
+                        <%= success_message%>
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            </div>
-        </div>
-    </div>
+                <% } %>
+                    
+                    <div class="card-header p-2" style="background-color: #d9edf7 !important; font-size: 1.1rem;">
+                        Employee Details Form
+                      </div>
+                    <div class="mb-3 px-4 pt-4">
+                        <label for="firstname" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter Your Name" required
+                            aria-describedby="emailHelp">
+
+                    </div>
+
+                    <div class="mb-3 px-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" name="email" class="form-control" placeholder="Email address.." required
+                            aria-describedby="emailHelp">
+
+                    </div>
+
+                    <div class="mb-3 px-4">
+                        <label for="type" class="form-label">Employee Type</label>
+                        <select class="form-control" name="eType">
+                            <option value="Hourly">Hourly</option>
+                            <option value="Fixed">Fixed</option>
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3 px-4">
+                        <label for="rate" class="form-label">Hourly Rate</label>
+                        <input type="text" name="hRate" class="form-control"  placeholder="Enter Hourly Rate" required
+                            aria-describedby="emailHelp">
+
+                    </div>
+
+                    <div class="mb-3 px-4">
+                        <label for="totlahour" class="form-label">Total Hour</label>
+                        <input type="text" name="tHour" class="form-control"  placeholder="Enter Total Hours " required
+                            aria-describedby="emailHelp">
+
+                    </div>
+
+                    <div class="mb-3 px-4">
+                        <label for="pImage" class="form-label">Profile Image</label>
+                        <input type="file" name="avatar" class="form-control"  
+                            aria-describedby="emailHelp">
+
+                    </div>
+
+
+                    <div class="px-4 pb-4">
+                        <button type="submit" name="submit" value="submit" class="btn btn-primary ">Submit</button>
+                    </div>
+                    
+        </form>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+    integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
